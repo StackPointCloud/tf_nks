@@ -1,5 +1,14 @@
 # NKS module for Terraform
 
+## Requirements
+
+* Terraform 0.11.0 or greater
+* Existing NKS organization
+* Existing NKS provider keysets
+* Existing NKS SSH keyset
+
+## Usage
+
 Create a Terraform config file. For example, `main.tf'.
 
 ```
@@ -50,3 +59,13 @@ terraform init
 terraform plan
 terraform apply
 ```
+
+## Todo
+
+* Document available module variables
+* Added GCE support
+* Allow SSH keys to be auto-generated through TF and imported as a keyset
+* Allow existing local SSH keys to be imported as a keyset
+* Allow user specified organization rather than assume the default
+* Allow provider credentials to be imported as keysets
+* Further testing...
