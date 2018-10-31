@@ -9,7 +9,7 @@
 
 ## Usage
 
-Create a Terraform config file. For example, `main.tf'.
+Create a Terraform config file. For example, `main.tf`.
 
 ```
 module "aws_cluster" {
