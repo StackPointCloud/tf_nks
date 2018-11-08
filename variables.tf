@@ -18,6 +18,11 @@ variable "ssh_keyset_name" {
   default     = ""
 }
 
+variable "ssh_key_path" {
+  description = "Path to the public SSH key"
+  default     = ""
+}
+
 variable "provider_code" {
   description = "Provider code (aws, azure, etc.)"
   default     = ""
