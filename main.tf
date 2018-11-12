@@ -9,14 +9,30 @@ data "nks_organization" "default" {
 
 data "nks_keyset" "provider_keyset" {
   category = "provider"
-  entity = "${var.provider_code}"
-  name = "${var.provider_keyset_name}"
+  entity   = "${var.provider_code}"
+  name     = "${var.provider_keyset_name}"
 }
 
 data "nks_keyset" "ssh_keyset" {
-  org_id = "${data.nks_organization.default.id}"
+  count    = "${var.ssh_keyset_name == "" ? 0 : 1}"
+  org_id   = "${data.nks_organization.default.id}"
   category = "user_ssh"
-  name = "${var.ssh_keyset_name}"
+  name     = "${var.ssh_keyset_name}"
+}
+
+resource "nks_keyset" "ssh_keyset" {
+  count    = "${var.ssh_key_path == "" ? 0 : 1}"
+  name     = "${var.cluster_name} SSH Key"
+  org_id   = "${data.nks_organization.default.id}"
+  category = "user_ssh"
+  entity   = "aws"
+
+  keys = [
+    {
+      key_type = "pub"
+      key      = "${file(var.ssh_key_path)}"
+    },
+  ]
 }
 
 data "nks_instance_specs" "master_specs" {
@@ -48,7 +64,7 @@ resource "nks_cluster" "cluster" {
   platform              = "${var.platform}"
   channel               = "stable"
   project_id            = "${var.project_id}"
-  ssh_keyset            = "${data.nks_keyset.ssh_keyset.id}"
+  ssh_keyset            = "${var.ssh_key_path == "" ? "${join("", data.nks_keyset.ssh_keyset.*.id)}" : "${join("", nks_keyset.ssh_keyset.*.id)}"}"
 }
 
 resource "local_file" "kubeconfig" {

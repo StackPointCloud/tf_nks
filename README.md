@@ -5,7 +5,7 @@
 * Terraform 0.11.0 or greater
 * Existing NKS organization
 * Existing NKS provider keysets
-* Existing NKS SSH keyset
+* Existing NKS SSH keyset or local public SSH key
 
 ## Usage
 
@@ -19,6 +19,7 @@ module "aws_cluster" {
   cluster_name = "My Test Cluster"
   provider_keyset_name = "My AWS Keyset Name"
   ssh_keyset_name = "My SSH Keyset Name"
+  # ssh_key_path = "/path/to/ssh/id_rsa.pub"
   kubeconfig_path = "./kubeconfig-aws"
 
   region = "us-east-2"
@@ -65,7 +66,6 @@ terraform apply
 * Document available module variables
 * Added GCE support
 * Allow SSH keys to be auto-generated through TF and imported as a keyset
-* Allow existing local SSH keys to be imported as a keyset
 * Allow user specified organization rather than assume the default
 * Allow provider credentials to be imported as keysets
 * Further testing...
