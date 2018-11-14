@@ -1,0 +1,49 @@
+# -----------------------------------------------------------------------------
+# The following example accepts provider credentials and path to the public
+# SSH keys as input parameters.
+# -----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
+# Deploy AWS cluster
+# -----------------------------------------------------------------------------
+module "aws_cluster" {
+  source = "github.com/StackPointCloud/tf_nks"
+
+  provider_code   = "aws"
+  cluster_name    = "TF Test 1"
+  kubeconfig_path = "./kubeconfig-aws"
+  aws_access_key  = "ACCESS_KEY_HERE"
+  aws_secret_key  = "SECRET_KEY_HERE"
+  ssh_key_path    = "/path/to/ssh/id_rsa.pub"
+  region          = "us-east-2"
+  zone            = "us-east-2a"
+  master_size     = "t2.medium"
+  worker_size     = "t2.medium"
+}
+
+output "aws_nodes" {
+  value = "${module.aws_cluster.nodes}"
+}
+
+# -----------------------------------------------------------------------------
+# Deploy Azure cluster
+# -----------------------------------------------------------------------------
+module "azure_cluster" {
+  source = "github.com/StackPointCloud/tf_nks"
+
+  provider_code         = "azure"
+  cluster_name          = "TF Test 2"
+  kubeconfig_path       = "./kubeconfig-azure"
+  ssh_key_path          = "/path/to/ssh/id_rsa.pub"
+  azure_client_id       = "CLIENT_ID_HERE"
+  azure_client_secret   = "CLIENT_TOKEN_HERE"
+  azure_tenant_id       = "TENANT_ID_HERE"
+  azure_subscription_id = "SUBSCRIPTION_ID_HERE"
+  region                = "eastus"
+  master_size           = "standard_f2"
+  worker_size           = "standard_f2"
+}
+
+output "azure_nodes" {
+  value = "${module.azure_cluster.nodes}"
+}

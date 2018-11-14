@@ -10,11 +10,12 @@ locals {
         key_type = "pub"
         key      = "${var.aws_access_key}"
       },
-          {
+      {
         key_type = "pvt"
         key      = "${var.aws_secret_key}"
       },
-    ],
+    ]
+
     azure = [
       {
         key_type = "pub"

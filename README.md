@@ -9,25 +9,22 @@
 
 ## Usage
 
-Create a Terraform config file. For example, `main.tf`.
+Create a Terraform `main.tf` config file or copy a multi-cloud example from the `./examples/` directory. For example:
 
 ```
 module "aws_cluster" {
   source = "github.com/StackPointCloud/tf_nks"
 
-  provider_code = "aws"
-  cluster_name = "My Test Cluster"
+  provider_code   = "aws"
+  cluster_name    = "My Test Cluster"
   kubeconfig_path = "./kubeconfig-aws"
 
-  # ssh_key_path = "/path/to/ssh/id_rsa.pub"
   ssh_keyset_name = "My SSH Keyset Name"
+  aws_access_key  = "ACCESSKEY"
+  aws_secret_key  = "SECRETKEY"
 
-  # provider_keyset_name = "My AWS Keyset Name"
-  aws_access_key = "ACCESSKEY"
-  aws_secret_key = "SECRETKEY"
-
-  region = "us-east-2"
-  zone = "us-east-2a"
+  region      = "us-east-2"
+  zone        = "us-east-2a"
   master_size = "t2.medium"
   worker_size = "t2.medium"
 }
@@ -45,14 +42,14 @@ Here is an example using Azure.
 module "azure_cluster" {
   source = "github.com/StackPointCloud/tf_nks"
 
-  provider_code = "azure"
-  cluster_name = "My Test Cluster"
+  provider_code   = "azure"
+  cluster_name    = "My Test Cluster"
   kubeconfig_path = "./kubeconfig-azure"
 
   provider_keyset_name = "My Azure Keyset"
-  ssh_keyset_name = "My SSH Keyset"
+  ssh_keyset_name      = "My SSH Keyset"
 
-  region = "eastus"
+  region      = "eastus"
   master_size = "standard_f2"
   worker_size = "standard_f2"
 }
