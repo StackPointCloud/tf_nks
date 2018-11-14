@@ -21,3 +21,7 @@ output "subnet_id" {
 output "subnet_cidr" {
   value = "${nks_cluster.cluster.provider_subnet_cidr}"
 }
+
+output "nodes" {
+  value = "${nks_cluster.cluster.nodes}"
+}

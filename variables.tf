@@ -97,3 +97,33 @@ variable "kubeconfig_path" {
   description = "Path to kubeconfig"
   default     = "./kubeconfig"
 }
+
+variable "aws_access_key" {
+  description = "AWS access key"
+  default     = ""
+}
+
+variable "aws_secret_key" {
+  description = "AWS secret key"
+  default     = ""
+}
+
+variable "azure_client_id" {
+  description = "Azure client ID (or application ID)"
+  default     = ""
+}
+
+variable "azure_client_secret" {
+  description = "Azure client secret (or application token)"
+  default     = ""
+}
+
+variable "azure_tenant_id" {
+  description = "Azure tenant ID (or directory ID)"
+  default     = ""
+}
+
+variable "azure_subscription_id" {
+  description = "Azure subscription ID"
+  default     = ""
+}

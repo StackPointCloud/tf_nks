@@ -4,26 +4,27 @@
 
 * Terraform 0.11.0 or greater
 * Existing NKS organization
-* Existing NKS provider keysets
-* Existing NKS SSH keyset or local public SSH key
+* NKS provider keysets or provider credentials
+* NKS SSH keyset or local public SSH key
 
 ## Usage
 
-Create a Terraform config file. For example, `main.tf`.
+Create a Terraform `main.tf` config file or copy a multi-cloud example from the `./examples/` directory. For example:
 
 ```
 module "aws_cluster" {
   source = "github.com/StackPointCloud/tf_nks"
 
-  provider_code = "aws"
-  cluster_name = "My Test Cluster"
-  provider_keyset_name = "My AWS Keyset Name"
-  ssh_keyset_name = "My SSH Keyset Name"
-  # ssh_key_path = "/path/to/ssh/id_rsa.pub"
+  provider_code   = "aws"
+  cluster_name    = "My Test Cluster"
   kubeconfig_path = "./kubeconfig-aws"
 
-  region = "us-east-2"
-  zone = "us-east-2a"
+  ssh_keyset_name = "My SSH Keyset Name"
+  aws_access_key  = "ACCESSKEY"
+  aws_secret_key  = "SECRETKEY"
+
+  region      = "us-east-2"
+  zone        = "us-east-2a"
   master_size = "t2.medium"
   worker_size = "t2.medium"
 }
@@ -41,13 +42,14 @@ Here is an example using Azure.
 module "azure_cluster" {
   source = "github.com/StackPointCloud/tf_nks"
 
-  provider_code = "azure"
-  cluster_name = "My Test Cluster"
-  provider_keyset_name = "My Azure Keyset"
-  ssh_keyset_name = "My SSH Keyset"
+  provider_code   = "azure"
+  cluster_name    = "My Test Cluster"
   kubeconfig_path = "./kubeconfig-azure"
 
-  region = "eastus"
+  provider_keyset_name = "My Azure Keyset"
+  ssh_keyset_name      = "My SSH Keyset"
+
+  region      = "eastus"
   master_size = "standard_f2"
   worker_size = "standard_f2"
 }
@@ -67,5 +69,4 @@ terraform apply
 * Added GCE support
 * Allow SSH keys to be auto-generated through TF and imported as a keyset
 * Allow user specified organization rather than assume the default
-* Allow provider credentials to be imported as keysets
 * Further testing...
