@@ -4,8 +4,8 @@
 
 * Terraform 0.11.0 or greater
 * Existing NKS organization
-* Existing NKS provider keysets
-* Existing NKS SSH keyset or local public SSH key
+* NKS provider keysets or provider credentials
+* NKS SSH keyset or local public SSH key
 
 ## Usage
 
@@ -17,10 +17,14 @@ module "aws_cluster" {
 
   provider_code = "aws"
   cluster_name = "My Test Cluster"
-  provider_keyset_name = "My AWS Keyset Name"
-  ssh_keyset_name = "My SSH Keyset Name"
-  # ssh_key_path = "/path/to/ssh/id_rsa.pub"
   kubeconfig_path = "./kubeconfig-aws"
+
+  # ssh_key_path = "/path/to/ssh/id_rsa.pub"
+  ssh_keyset_name = "My SSH Keyset Name"
+
+  # provider_keyset_name = "My AWS Keyset Name"
+  aws_access_key = "ACCESSKEY"
+  aws_secret_key = "SECRETKEY"
 
   region = "us-east-2"
   zone = "us-east-2a"
@@ -43,9 +47,10 @@ module "azure_cluster" {
 
   provider_code = "azure"
   cluster_name = "My Test Cluster"
+  kubeconfig_path = "./kubeconfig-azure"
+
   provider_keyset_name = "My Azure Keyset"
   ssh_keyset_name = "My SSH Keyset"
-  kubeconfig_path = "./kubeconfig-azure"
 
   region = "eastus"
   master_size = "standard_f2"
@@ -67,5 +72,4 @@ terraform apply
 * Added GCE support
 * Allow SSH keys to be auto-generated through TF and imported as a keyset
 * Allow user specified organization rather than assume the default
-* Allow provider credentials to be imported as keysets
 * Further testing...
