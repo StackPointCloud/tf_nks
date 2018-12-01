@@ -25,3 +25,7 @@ output "subnet_cidr" {
 output "nodes" {
   value = "${nks_cluster.cluster.nodes}"
 }
+
+output "kubeconfig" {
+  value = "${nks_cluster.cluster.kubeconfig}"
+}

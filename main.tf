@@ -114,8 +114,3 @@ resource "nks_cluster" "cluster" {
   project_id            = "${var.project_id}"
   ssh_keyset            = "${var.ssh_key_path == "" ? "${join("", data.nks_keyset.ssh_keyset.*.id)}" : "${join("", nks_keyset.ssh_keyset.*.id)}"}"
 }
-
-resource "local_file" "kubeconfig" {
-  content  = "${nks_cluster.cluster.kubeconfig}"
-  filename = "${var.kubeconfig_path}"
-}

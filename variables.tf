@@ -93,11 +93,6 @@ variable "resource_group" {
   default     = "__new__"
 }
 
-variable "kubeconfig_path" {
-  description = "Path to kubeconfig"
-  default     = "./kubeconfig"
-}
-
 variable "aws_access_key" {
   description = "AWS access key"
   default     = ""
