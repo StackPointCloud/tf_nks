@@ -94,23 +94,25 @@ data "nks_instance_specs" "worker_specs" {
 }
 
 resource "nks_cluster" "cluster" {
-  org_id                = "${data.nks_organization.default.id}"
-  cluster_name          = "${var.cluster_name}"
-  provider_code         = "${var.provider_code}"
-  provider_keyset       = "${var.provider_keyset_name == "" ? "${join("", nks_keyset.provider_keyset.*.id)}" : "${join("", data.nks_keyset.provider_keyset.*.id)}"}"
-  region                = "${var.region}"
-  k8s_version           = "${var.k8s_version}"
-  startup_master_size   = "${data.nks_instance_specs.master_specs.node_size}"
-  startup_worker_count  = "${var.worker_count}"
-  startup_worker_size   = "${data.nks_instance_specs.worker_specs.node_size}"
-  zone                  = "${var.zone}"
-  provider_network_cidr = "${var.network_cidr}"
-  provider_subnet_cidr  = "${var.subnet_cidr}"
-  rbac_enabled          = true
-  dashboard_enabled     = true
-  etcd_type             = "classic"
-  platform              = "${var.platform}"
-  channel               = "stable"
-  project_id            = "${var.project_id}"
-  ssh_keyset            = "${var.ssh_key_path == "" ? "${join("", data.nks_keyset.ssh_keyset.*.id)}" : "${join("", nks_keyset.ssh_keyset.*.id)}"}"
+  org_id                        = "${data.nks_organization.default.id}"
+  cluster_name                  = "${var.cluster_name}"
+  provider_code                 = "${var.provider_code}"
+  provider_keyset               = "${var.provider_keyset_name == "" ? "${join("", nks_keyset.provider_keyset.*.id)}" : "${join("", data.nks_keyset.provider_keyset.*.id)}"}"
+  region                        = "${var.region}"
+  k8s_version                   = "${var.k8s_version}"
+  startup_master_size           = "${data.nks_instance_specs.master_specs.node_size}"
+  startup_worker_count          = "${var.worker_count}"
+  startup_worker_size           = "${data.nks_instance_specs.worker_specs.node_size}"
+  zone                          = "${var.zone}"
+  provider_network_id_requested = "${var.network_id}"
+  provider_network_cidr         = "${var.network_cidr}"
+  provider_subnet_id_requested  = "${var.subnet_id}"
+  provider_subnet_cidr          = "${var.subnet_cidr}"
+  rbac_enabled                  = true
+  dashboard_enabled             = true
+  etcd_type                     = "classic"
+  platform                      = "${var.platform}"
+  channel                       = "stable"
+  project_id                    = "${var.project_id}"
+  ssh_keyset                    = "${var.ssh_key_path == "" ? "${join("", data.nks_keyset.ssh_keyset.*.id)}" : "${join("", nks_keyset.ssh_keyset.*.id)}"}"
 }
