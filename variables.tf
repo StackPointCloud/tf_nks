@@ -30,7 +30,7 @@ variable "provider_code" {
 
 variable "k8s_version" {
   description = "Kubernetes version"
-  default     = "v1.11.1"
+  default     = ""
 }
 
 variable "platform" {
